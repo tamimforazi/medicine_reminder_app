@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: TextStyle(color: Color(0xffBDBDBD), fontSize: 39),
                 ),
               ),
-              Spacer(), // This pushes the last image to the bottom
+              Spacer(),
             ],
           ),
         ],
