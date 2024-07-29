@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:medicine_reminder_app/const/constant.dart';
 import 'package:medicine_reminder_app/screens/profile_setup_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: AppColors.backgroundColor,
       body: Stack(
         children: [
           Align(
@@ -38,7 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
               Center(
                 child: Text(
                   "MediCare",
-                  style: TextStyle(color: Color(0xffBDBDBD), fontSize: 39),
+                  style:
+                      TextStyle(color: AppColors.subtitleColor, fontSize: 39),
                 ),
               ),
               Spacer(),
@@ -53,11 +54,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 2),
+      AppDurations.splashDuration,
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Profile_Setup_Screen(),
+          builder: (context) => ProfileSetupScreen(),
         ),
       ),
     );
