@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicine_reminder_app/components/add_another_profile_button.dart';
 import 'package:medicine_reminder_app/components/green_button.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/profile_screen.dart';
 import 'package:medicine_reminder_app/screens/profile_setup_screen.dart';
 
 class SetUpCompleteScreen extends StatelessWidget {
@@ -71,7 +72,7 @@ class SetUpCompleteScreen extends StatelessWidget {
                 onPress: () => Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SetUpCompleteScreen(),
+                    builder: (context) => ProfileScreen(),
                   ),
                 ),
               ),
