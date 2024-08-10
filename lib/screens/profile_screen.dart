@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medicine_reminder_app/components/add_another_profile_button.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/home_screen.dart';
 import 'package:medicine_reminder_app/screens/profile_setup_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -55,78 +56,91 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: Container(
-                                padding: const EdgeInsets.all(15.0),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff98A3BB),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      height: 90,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              "images/Mask group.png"),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomeScreen(
+                                        profileName: "FARHAD E HASAN FEH",
+                                        profileImage: "images/Mask group.png",
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(15.0),
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 10.0),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xff98A3BB),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 80,
+                                        height: 90,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: AssetImage(
+                                                "images/Mask group.png"),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(width: 20),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "FARHAD E HASAN FEH",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "30",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18),
-                                              ),
-                                              SizedBox(width: 20),
-                                              Text(
-                                                "(M)",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "70kg",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18),
-                                              ),
-                                              SizedBox(width: 20),
-                                              Text(
-                                                "180cm",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      SizedBox(width: 20),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "FARHAD E HASAN FEH",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "30",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                                SizedBox(width: 20),
+                                                Text(
+                                                  "(M)",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "70kg",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                                SizedBox(width: 20),
+                                                Text(
+                                                  "180cm",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
