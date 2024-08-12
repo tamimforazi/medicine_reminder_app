@@ -35,10 +35,11 @@ class ProfileScreen extends StatelessWidget {
                       "Profiles",
                       style: TextStyle(color: Colors.black, fontSize: 36),
                     ),
+                    SizedBox(height: 15),
                     Expanded(
                       child: ListView(
                         children: List.generate(
-                          6,
+                          3,
                           (index) {
                             return Slidable(
                               key: ValueKey(index),
@@ -68,78 +69,72 @@ class ProfileScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: Container(
-                                  padding: const EdgeInsets.all(15.0),
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 10.0),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xff98A3BB),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 80,
-                                        height: 90,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: AssetImage(
-                                                "images/Mask group.png"),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 20.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Container(
+                                      color: const Color(0xff98A3BB),
+                                      child: InkWell(
+                                        child: Row(
                                           children: [
-                                            Text(
-                                              "FARHAD E HASAN FEH",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 18),
+                                            Image.asset(
+                                              "images/Mask group.png",
+                                              fit: BoxFit.cover,
                                             ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "30",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 18),
-                                                ),
-                                                SizedBox(width: 20),
-                                                Text(
-                                                  "(M)",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "70kg",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 18),
-                                                ),
-                                                SizedBox(width: 20),
-                                                Text(
-                                                  "180cm",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
+                                            SizedBox(width: 20),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "FARHAD E HASAN FEH",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 18),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "30",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 18),
+                                                      ),
+                                                      SizedBox(width: 20),
+                                                      Text(
+                                                        "(M)",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 18),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "70kg",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 18),
+                                                      ),
+                                                      SizedBox(width: 20),
+                                                      Text(
+                                                        "180cm",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 18),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
