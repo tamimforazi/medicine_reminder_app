@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicine_reminder_app/components/custom_appbar.dart';
 import 'package:medicine_reminder_app/components/listTile.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/prescription_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final String profileName;
@@ -36,14 +37,24 @@ class HomeScreen extends StatelessWidget {
               CustomListTile(
                 imagePath: 'images/prescription.png',
                 title: 'Prescription',
+                subTitle: '',
                 onTap: () {
-                  // Navigate to Prescription screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PrescriptionScreen(
+                        profileName: 'FARHAD E HASAN FEH',
+                        profileImage: 'images/Mask group.png',
+                      ),
+                    ),
+                  );
                 },
               ),
               SizedBox(height: 20),
               CustomListTile(
                 imagePath: 'images/medicine.png',
                 title: 'Medicine',
+                subTitle: '',
                 onTap: () {
                   // Navigate to Medicine screen
                 },
@@ -52,6 +63,7 @@ class HomeScreen extends StatelessWidget {
               CustomListTile(
                 imagePath: 'images/reminder.png',
                 title: 'Reminder',
+                subTitle: '',
                 onTap: () {
                   // Navigate to Reminder screen
                 },

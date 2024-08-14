@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CustomListTile extends StatelessWidget {
   final String imagePath;
   final String title;
+  final String subTitle;
   final VoidCallback onTap;
 
   const CustomListTile({
     required this.imagePath,
     required this.title,
+    required this.subTitle,
     required this.onTap,
     Key? key,
   }) : super(key: key);
@@ -27,9 +29,18 @@ class CustomListTile extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               const SizedBox(width: 16),
-              Text(
-                title,
-                style: TextStyle(fontSize: 22),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 22),
+                  ),
+                  Text(
+                    subTitle,
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ],
               ),
             ],
           ),

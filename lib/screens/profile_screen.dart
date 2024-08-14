@@ -5,8 +5,40 @@ import 'package:medicine_reminder_app/const/constant.dart';
 import 'package:medicine_reminder_app/screens/home_screen.dart';
 import 'package:medicine_reminder_app/screens/profile_setup_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  List<Map<String, String>> profiles = [
+    {
+      'name': 'FARHAD E HASAN FEH',
+      'age': '30',
+      'gender': '(M)',
+      'weight': '70kg',
+      'height': '180cm',
+      'imagePath': 'images/Mask group.png',
+    },
+    {
+      'name': 'JANE DOE',
+      'age': '28',
+      'gender': '(F)',
+      'weight': '60kg',
+      'height': '165cm',
+      'imagePath': 'images/Mask group.png',
+    },
+    {
+      'name': 'JOHN SMITH',
+      'age': '35',
+      'gender': '(M)',
+      'weight': '80kg',
+      'height': '175cm',
+      'imagePath': 'images/Mask group.png',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,110 +69,119 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 15),
                     Expanded(
-                      child: ListView(
-                        children: List.generate(
-                          3,
-                          (index) {
-                            return Slidable(
-                              key: ValueKey(index),
-                              endActionPane: ActionPane(
-                                motion: const ScrollMotion(),
-                                dismissible:
-                                    DismissiblePane(onDismissed: () {}),
-                                children: [
-                                  SlidableAction(
-                                    onPressed: (context) {},
-                                    backgroundColor: const Color(0xffED4E4E),
-                                    foregroundColor: Colors.white,
-                                    icon: Icons.delete,
-                                    label: 'Delete',
-                                  ),
-                                ],
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomeScreen(
-                                        profileName: "FARHAD E HASAN FEH",
-                                        profileImage: "images/Mask group.png",
+                      child: ListView.builder(
+                        itemCount: profiles.length,
+                        itemBuilder: (context, index) {
+                          return Slidable(
+                            key: ValueKey(index),
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    setState(() {
+                                      profiles.removeAt(index);
+                                    });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Profile deleted'),
                                       ),
+                                    );
+                                  },
+                                  backgroundColor: const Color(0xffED4E4E),
+                                  foregroundColor: Colors.white,
+                                  icon: Icons.delete,
+                                  label: 'Delete',
+                                ),
+                              ],
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomeScreen(
+                                      profileName: profiles[index]['name']!,
+                                      profileImage: profiles[index]
+                                          ['imagePath']!,
                                     ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 20.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Container(
-                                      color: const Color(0xff98A3BB),
-                                      child: InkWell(
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                              "images/Mask group.png",
-                                              fit: BoxFit.cover,
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 20.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Container(
+                                    color: const Color(0xff98A3BB),
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            profiles[index]['imagePath']!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          SizedBox(width: 20),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  profiles[index]['name']!,
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      profiles[index]['age']!,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18),
+                                                    ),
+                                                    SizedBox(width: 20),
+                                                    Text(
+                                                      profiles[index]
+                                                          ['gender']!,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      profiles[index]
+                                                          ['weight']!,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18),
+                                                    ),
+                                                    SizedBox(width: 20),
+                                                    Text(
+                                                      profiles[index]
+                                                          ['height']!,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                            SizedBox(width: 20),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "FARHAD E HASAN FEH",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 18),
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        "30",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 18),
-                                                      ),
-                                                      SizedBox(width: 20),
-                                                      Text(
-                                                        "(M)",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 18),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        "70kg",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 18),
-                                                      ),
-                                                      SizedBox(width: 20),
-                                                      Text(
-                                                        "180cm",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 18),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
