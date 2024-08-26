@@ -21,8 +21,8 @@ class AddAnotherProfileButton extends StatelessWidget {
             color: color,
             borderRadius: BorderRadius.circular(10),
           ),
-          height: MediaQuery.of(context).size.height * .085,
-          width: MediaQuery.of(context).size.width * .84,
+          height: MediaQuery.of(context).size.height * .075,
+          width: MediaQuery.of(context).size.width * .90,
           child: Center(
             child: Text(
               title,

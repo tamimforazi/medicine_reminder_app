@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:medicine_reminder_app/const/constant.dart';
 
-class GreenButton extends StatelessWidget {
+class DeleteButton extends StatelessWidget {
   final String title;
   final VoidCallback onPress;
   final Color color;
 
-  GreenButton(
+  DeleteButton(
       {required this.title,
       required this.onPress,
-      this.color = const Color(0xff266643)});
+      this.color = AppColors.deleteColour});
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +24,19 @@ class GreenButton extends StatelessWidget {
           ),
           height: MediaQuery.of(context).size.height * .075,
           width: MediaQuery.of(context).size.width * .90,
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                color: Color(0xffFFFFFF),
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.delete, color: Color(0xffFFFFFF), size: 20),
+              Text(
+                title,
+                style: TextStyle(
+                  color: Color(0xffFFFFFF),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
