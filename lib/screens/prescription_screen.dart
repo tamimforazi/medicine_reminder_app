@@ -126,8 +126,8 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddPrescriptionScreen(
-                    profileName: '',
-                    profileImage: '',
+                    profileName: 'FARHAD E HASAN FEH',
+                    profileImage: 'images/Mask group.png',
                   ),
                 ),
               ),
