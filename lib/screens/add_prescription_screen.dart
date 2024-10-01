@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:medicine_reminder_app/components/custom_appbar.dart';
+import 'package:medicine_reminder_app/components/add_another_profile_button.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
 
 class AddPrescriptionScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
   DateTime? _selectedDate;
   File? _image;
 
-  final ImagePicker _picker = ImagePicker(); // Initialize the ImagePicker
+  final ImagePicker _picker = ImagePicker();
 
   void _pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -59,6 +60,9 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final boxHeight = MediaQuery.of(context).size.height * 0.075;
+    final boxWidth = MediaQuery.of(context).size.width * 0.90;
+
     return Scaffold(
       appBar: CustomAppBar(
         profileName: widget.profileName,
@@ -76,7 +80,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
               "Add Prescription",
               style: TextStyle(color: Colors.black, fontSize: 36),
             ),
-            SizedBox(height: 25),
+            SizedBox(height: 15),
             TextField(
               controller: _doctorNameController,
               style: TextStyle(color: AppColors.boxTextColour),
@@ -84,60 +88,131 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                 filled: true,
                 fillColor: Color(0xffD9DDE6),
                 hintText: 'Doctor\'s Name',
+                hintStyle: TextStyle(color: AppColors.boxTextColour),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             GestureDetector(
               onTap: () => _pickDate(context),
               child: Container(
+                height: boxHeight,
+                width: boxWidth,
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 decoration: BoxDecoration(
                   color: Color(0xffD9DDE6),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  _selectedDate != null
-                      ? _selectedDate.toString().split(' ')[0]
-                      : 'Select Date',
-                  style: TextStyle(color: AppColors.boxTextColour),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    _selectedDate != null
+                        ? _selectedDate.toString().split(' ')[0]
+                        : 'Select Date',
+                    style: TextStyle(
+                        color: AppColors.boxTextColour,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  onPressed: _captureImage,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffD9DDE6),
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.42,
+                  decoration: BoxDecoration(
+                    color: Color(0xffD9DDE6),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text('Capture Image',
-                      style: TextStyle(color: Colors.black)),
+                  child: ElevatedButton(
+                    onPressed: _captureImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.camera_alt, color: AppColors.boxTextColour),
+                        SizedBox(height: 5),
+                        Text(
+                          'Capture',
+                          style: TextStyle(color: AppColors.boxTextColour),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: _uploadImage,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffD9DDE6),
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.42,
+                  decoration: BoxDecoration(
+                    color: Color(0xffD9DDE6),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text('Upload Image',
-                      style: TextStyle(color: Colors.black)),
+                  child: ElevatedButton(
+                    onPressed: _uploadImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.upload, color: AppColors.boxTextColour),
+                        SizedBox(height: 5),
+                        Text(
+                          'Upload',
+                          style: TextStyle(color: AppColors.boxTextColour),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             if (_image != null)
               Image.file(
                 _image!,
                 height: 200,
                 fit: BoxFit.cover,
               ),
+            SizedBox(height: 10),
+            Container(
+              height: boxHeight,
+              width: boxWidth,
+              decoration: BoxDecoration(
+                color: Color(0xffD9DDE6),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors
+                      .transparent, // Transparent for BoxDecoration to take effect
+                  shadowColor: Colors.transparent, // Remove shadow
+                ),
+                child: Text('Add Medicine',
+                    style: TextStyle(
+                        color: AppColors.boxTextColour,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            Spacer(), // Added space after the "Save" button
+            AddAnotherProfileButton(
+              title: "Save",
+              onPress: () {
+                print("Save button tapped");
+              },
+            ),
+            SizedBox(height: 10),
           ],
         ),
       ),
