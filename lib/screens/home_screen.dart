@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicine_reminder_app/components/custom_appbar.dart';
 import 'package:medicine_reminder_app/components/listTile.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/medicine_screen.dart';
 import 'package:medicine_reminder_app/screens/prescription_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -56,7 +57,15 @@ class HomeScreen extends StatelessWidget {
                 title: 'Medicine',
                 subTitle: '',
                 onTap: () {
-                  // Navigate to Medicine screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MedicineScreen(
+                        profileName: 'FARHAD E HASAN FEH',
+                        profileImage: 'images/Mask group.png',
+                      ),
+                    ),
+                  );
                 },
               ),
               SizedBox(height: 20),

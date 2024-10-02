@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:medicine_reminder_app/components/custom_appbar.dart';
 import 'package:medicine_reminder_app/components/add_another_profile_button.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/prescription_screen.dart';
 
 class AddPrescriptionScreen extends StatefulWidget {
   final String profileName;
@@ -195,9 +196,8 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors
-                      .transparent, // Transparent for BoxDecoration to take effect
-                  shadowColor: Colors.transparent, // Remove shadow
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
                 ),
                 child: Text('Add Medicine',
                     style: TextStyle(
@@ -205,12 +205,18 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                         fontWeight: FontWeight.bold)),
               ),
             ),
-            Spacer(), // Added space after the "Save" button
+            Spacer(),
             AddAnotherProfileButton(
               title: "Save",
-              onPress: () {
-                print("Save button tapped");
-              },
+              onPress: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PrescriptionScreen(
+                    profileName: 'FARHAD E HASAN FEH',
+                    profileImage: 'images/Mask group.png',
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 10),
           ],
