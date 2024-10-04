@@ -4,6 +4,7 @@ import 'package:medicine_reminder_app/components/add_another_profile_button.dart
 import 'package:medicine_reminder_app/components/custom_appbar.dart';
 import 'package:medicine_reminder_app/components/listTile.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/add_medicine_screen.dart';
 import 'package:medicine_reminder_app/screens/add_prescription_screen.dart';
 import 'package:medicine_reminder_app/screens/medicine_list_screen.dart';
 
@@ -125,7 +126,7 @@ class _MedicineScreenState extends State<MedicineScreen> {
               onPress: () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPrescriptionScreen(
+                  builder: (context) => AddMedicineScreen(
                     profileName: 'FARHAD E HASAN FEH',
                     profileImage: 'images/Mask group.png',
                   ),
