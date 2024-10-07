@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
+import 'package:medicine_reminder_app/screens/login_screen.dart';
 import 'package:medicine_reminder_app/screens/profile_setup_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -58,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfileSetupScreen(),
+          builder: (context) => LoginScreen(),
         ),
       ),
     );
