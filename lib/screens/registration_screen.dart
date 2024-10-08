@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicine_reminder_app/components/green_button.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
 import 'package:medicine_reminder_app/screens/login_screen.dart';
+import 'package:medicine_reminder_app/services/auth_service.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -12,9 +13,41 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
-  String name = '';
-  String emailOrPhone = '';
-  String password = '';
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailOrPhoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final AuthService _authService = AuthService();
+
+  void _handleRegistration() async {
+    if (_formKey.currentState!.validate()) {
+      bool success = await _authService.registerUser(
+        name: _nameController.text,
+        emailOrPhone: _emailOrPhoneController.text,
+        password: _passwordController.text,
+        confirmPassword: _confirmPasswordController.text,
+      );
+
+      if (success) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailOrPhoneController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,84 +83,53 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               color: AppColors.textColor, fontSize: 36),
                         ),
                         SizedBox(height: 20),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Name',
-                            labelStyle:
-                                TextStyle(color: AppColors.boxTextColour),
-                            fillColor: AppColors.inputFillColor,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your name';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            name = value!;
-                          },
-                        ),
+                        _buildTextFormField('Name', _nameController, (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          print("name is $value");
+                          return null;
+                        }),
                         SizedBox(height: 20),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Email or Phone',
-                            labelStyle:
-                                TextStyle(color: AppColors.boxTextColour),
-                            fillColor: AppColors.inputFillColor,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your email or phone';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            emailOrPhone = value!;
-                          },
-                        ),
+                        _buildTextFormField(
+                            'Email or Phone', _emailOrPhoneController, (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email or phone';
+                          }
+                          print("email is $value");
+
+                          return null;
+                        }),
                         SizedBox(height: 20),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle:
-                                TextStyle(color: AppColors.boxTextColour),
-                            fillColor: AppColors.inputFillColor,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          obscureText: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            password = value!;
-                          },
-                        ),
+                        _buildPasswordField('Password', _passwordController,
+                            (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          print("password is $value");
+
+                          return null;
+                        }),
+                        SizedBox(height: 20),
+                        _buildPasswordField(
+                            'Confirm Password', _confirmPasswordController,
+                            (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please confirm your password';
+                          }
+                          print("confirm password is $value");
+
+                          if (value != _passwordController.text) {
+                            return 'Passwords do not match';
+                          }
+                          print("confirm is $value");
+
+                          return null;
+                        }),
                         SizedBox(height: 20),
                         GreenButton(
                           title: "Register",
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              // Process registration
-                            }
-                          },
+                          onPress: _handleRegistration,
                         ),
                         SizedBox(height: 10),
                         Center(
@@ -157,6 +159,43 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextFormField(String labelText, TextEditingController controller,
+      String? Function(String?) validator) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: AppColors.boxTextColour),
+        fillColor: AppColors.inputFillColor,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+      ),
+      validator: validator,
+    );
+  }
+
+  Widget _buildPasswordField(String labelText, TextEditingController controller,
+      String? Function(String?) validator) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: AppColors.boxTextColour),
+        fillColor: AppColors.inputFillColor,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+      ),
+      obscureText: true,
+      validator: validator,
     );
   }
 }
