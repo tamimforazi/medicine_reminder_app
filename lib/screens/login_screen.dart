@@ -3,6 +3,7 @@ import 'package:medicine_reminder_app/components/green_button.dart';
 import 'package:medicine_reminder_app/const/constant.dart';
 import 'package:medicine_reminder_app/screens/profile_screen.dart';
 import 'package:medicine_reminder_app/screens/registration_screen.dart';
+import 'package:medicine_reminder_app/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,8 +14,34 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  String emailOrPhone = '';
-  String password = '';
+
+  final TextEditingController _emailOrPhoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final AuthService _authService = AuthService();
+
+  void _handleLogin() async {
+    if (_formKey.currentState!.validate()) {
+      bool success = await _authService.loginUser(
+        emailOrPhone: _emailOrPhoneController.text,
+        password: _passwordController.text,
+      );
+
+      if (success) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailOrPhoneController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 20),
                         TextFormField(
+                          controller: _emailOrPhoneController,
                           decoration: InputDecoration(
                             labelText: 'Email or Phone',
                             labelStyle:
@@ -68,12 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                             return null;
                           },
-                          onSaved: (value) {
-                            emailOrPhone = value!;
-                          },
                         ),
                         SizedBox(height: 20),
                         TextFormField(
+                          controller: _passwordController,
                           decoration: InputDecoration(
                             labelText: 'Password',
                             labelStyle:
@@ -92,23 +118,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                             return null;
                           },
-                          onSaved: (value) {
-                            password = value!;
-                          },
                         ),
                         SizedBox(height: 20),
                         GreenButton(
                           title: "Login",
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProfileScreen()),
-                              );
-                            }
-                          },
+                          onPress: _handleLogin,
                         ),
                         SizedBox(height: 10),
                         Center(

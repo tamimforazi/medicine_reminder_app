@@ -5,6 +5,49 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medicine_reminder_app/const/api.dart';
 
 class AuthService {
+  Future<bool> loginUser({
+    required String emailOrPhone,
+    required String password,
+  }) async {
+    final url = Uri.parse('$LOGIN_URI');
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'username': emailOrPhone,
+        'password': password,
+      }),
+    );
+
+    print("status code: ${response.statusCode}");
+    print("response.body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(
+        msg: "Login successful",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      return true;
+    } else {
+      Fluttertoast.showToast(
+        msg: "Login failed: ${response.statusCode}",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      return false;
+    }
+  }
+
   Future<bool> registerUser({
     required String name,
     required String emailOrPhone,

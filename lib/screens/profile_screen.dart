@@ -4,7 +4,7 @@ import 'package:medicine_reminder_app/components/add_another_profile_button.dart
 import 'package:medicine_reminder_app/const/constant.dart';
 import 'package:medicine_reminder_app/screens/home_screen.dart';
 import 'package:medicine_reminder_app/screens/profile_setup_screen.dart';
-import 'package:medicine_reminder_app/screens/login_screen.dart'; // Make sure to import your login screen
+import 'package:medicine_reminder_app/screens/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -51,18 +51,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
               child: Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        LoginScreen(), // Ensure this screen exists
+                    builder: (context) => LoginScreen(),
                   ),
                 );
               },
