@@ -17,7 +17,7 @@ class AuthService {
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
-        'username': emailOrPhone,
+        'login': emailOrPhone,
         'password': password,
       }),
     );
