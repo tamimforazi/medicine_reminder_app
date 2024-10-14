@@ -7,6 +7,7 @@ import 'package:medicine_reminder_app/const/constant.dart';
 import 'package:medicine_reminder_app/screens/add_medicine_screen.dart';
 import 'package:medicine_reminder_app/screens/add_prescription_screen.dart';
 import 'package:medicine_reminder_app/screens/medicine_list_screen.dart';
+import 'package:medicine_reminder_app/screens/view_medicine_screen.dart';
 
 class MedicineScreen extends StatefulWidget {
   final String profileName;
@@ -105,7 +106,7 @@ class _MedicineScreenState extends State<MedicineScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MedicineListScreen(
+                              builder: (context) => ViewMedicineScreen(
                                 profileName: widget.profileName,
                                 profileImage: widget.profileImage,
                               ),
